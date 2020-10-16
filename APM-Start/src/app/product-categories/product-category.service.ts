@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap, shareReplay, mergeMap, pluck, distinct, toArray } from 'rxjs/operators';
+import { combineLatest, Observable, throwError } from 'rxjs';
+import { catchError, tap, shareReplay, mergeMap, pluck, distinct, toArray, map } from 'rxjs/operators';
+import { Product } from '../products/product';
+import { ProductData } from '../products/product-data';
 import { ProductCategory } from './product-category';
 
 @Injectable({
@@ -9,6 +11,20 @@ import { ProductCategory } from './product-category';
 })
 export class ProductCategoryService {
   private productCategoriesUrl = 'api/productCategories';
+
+  
+  
+  /*this.http.get<ProductCategory[]>(this.productCategoriesUrl)
+    .pipe(
+      map(products =>
+        products.map(product => ({
+          ...product,
+
+        }))
+      ),
+      tap(data => console.log('categories', data)),
+      catchError((this.handleError))
+    );*/
 
   // All product categories
   // Instead of defining the http.get in a method in the service,
@@ -21,15 +37,15 @@ export class ProductCategoryService {
     );
 
   // Categories for drop down list
-  categoryNames$ = this.productCategories$
-    .pipe(
-      mergeMap(categories => categories),
-      pluck('name'),
-      distinct(),
-      toArray(),
-      tap(c => console.log('Each category', c)),
-      shareReplay()
-    );
+  // categoryNames$ = this.productCategories$
+  //   .pipe(
+  //     mergeMap(categories => categories),
+  //     pluck('name'),
+  //     distinct(),
+  //     toArray(),
+  //     tap(c => console.log('Each category', c)),
+  //     shareReplay()
+  //   );
 
   constructor(private http: HttpClient) { }
 

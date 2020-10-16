@@ -12,9 +12,8 @@ export class ProductListComponent implements OnInit {
   pageTitle = 'Product List';
   errorMessage = '';
 
-  products$ = this.productService.products$
+  products$ = this.productService.productsWithCategory$
     .pipe(
-     
       catchError(err => {
         this.errorMessage = err;
         return EMPTY;
