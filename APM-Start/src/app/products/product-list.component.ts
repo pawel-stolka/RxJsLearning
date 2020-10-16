@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Product } from './product';
 import { ProductService } from './product.service';
 
 @Component({
@@ -15,6 +14,7 @@ export class ProductListComponent implements OnInit {
 
   products$ = this.productService.products$
     .pipe(
+     
       catchError(err => {
         this.errorMessage = err;
         return EMPTY;
