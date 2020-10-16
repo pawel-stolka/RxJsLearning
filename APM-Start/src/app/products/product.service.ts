@@ -15,9 +15,11 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productsUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
-      catchError(this.handleError)
+    return this.http.get<Product[]>(this.productsUrl)
+      .pipe(
+        tap(data => //console.log('All: ' + JSON.stringify(data))),
+                  console.log(data)),
+        catchError(this.handleError)
     );
   }
 
