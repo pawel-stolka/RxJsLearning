@@ -17,10 +17,11 @@ export class ProductListAltComponent  {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(
-      products => this.products = products,
-      error => this.errorMessage = <any>error
-    );
+    this.productService.getProducts()
+    // this.productService.getProducts().subscribe(
+    //   products => this.products = products,
+    //   error => this.errorMessage = <any>error
+    // );
   }
 
   onSelected(productId: number): void {

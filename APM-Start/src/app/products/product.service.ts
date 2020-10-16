@@ -12,16 +12,21 @@ import { Product } from './product';
 export class ProductService {
   private productsUrl = 'api/products';
 
+  products$ = this.http.get<Product[]>(this.productsUrl)
+    .pipe(
+      catchError(this.handleError)
+    )
+
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productsUrl)
-      .pipe(
-        tap(data => //console.log('All: ' + JSON.stringify(data))),
-                  console.log(data)),
-        catchError(this.handleError)
-    );
-  }
+  // getProducts(): Observable<Product[]> {
+  //   return this.http.get<Product[]>(this.productsUrl)
+  //     .pipe(
+  //       tap(data => //console.log('All: ' + JSON.stringify(data))),
+  //                 console.log(data)),
+  //       catchError(this.handleError)
+  //   );
+  // }
 
   private handleError(err: any) {
     // in a real world app, we may send the server to some remote logging infrastructure
